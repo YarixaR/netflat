@@ -30,6 +30,7 @@ end
 
 gem 'activerecord-reset-pk-sequence'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'active_model_serializers'
 
 
 
