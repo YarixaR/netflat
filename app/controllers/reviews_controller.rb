@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
-  before_action :find_review, only: [:show]
+  before_action :find_review, only: [:show, :update, :destroy]
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
   
+
   # GET '/reviews'
   def index
     render json: Review.all, status: :ok
@@ -39,4 +41,9 @@ class ReviewsController < ApplicationController
   def review_params
     params.permit(:rating, :comment, :user_id, :movie_id)
   end
+
+  def render_unprocessable_entity_response(exception)
+    render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
+  end
+
 end
